@@ -7,4 +7,5 @@ python-dotenv
 deep-translator
 textblob
 altair
+streamlit-lottie
 requests
