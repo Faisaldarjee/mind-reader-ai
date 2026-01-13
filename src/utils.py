@@ -2,13 +2,25 @@ import os
 import json
 import google.generativeai as genai
 from dotenv import load_dotenv
+import streamlit as st  # <-- Ye zaroori import hai Cloud ke liye
 
-# 1. SETUP
+# 1. SETUP (Updated Logic)
 load_dotenv()
-api_key = os.getenv("GEMINI_API_KEY")
 
+# Logic: Pehle Cloud Secrets check karo, fir Local .env check karo
+try:
+    # Streamlit Cloud try karega
+    api_key = st.secrets["GEMINI_API_KEY"]
+except:
+    # Agar fail hua (Local PC), toh .env try karega
+    api_key = os.getenv("GEMINI_API_KEY")
+
+# Safety Check
 if not api_key:
-    raise ValueError("GEMINI_API_KEY not found in .env")
+    # Error dikhayega par app crash nahi hone dega turant
+    st.error("❌ API Key Missing! Please add GEMINI_API_KEY in Streamlit Secrets.")
+    # Hum dummy key set kar denge taaki code turant crash na ho, bas error dikhaye
+    api_key = "MISSING_KEY"
 
 genai.configure(api_key=api_key)
 
@@ -167,4 +179,5 @@ def analyze_audio_tone(audio_bytes):
         return json.loads(cleaned)
 
     except Exception as e:
+
         return {"error": f"Audio Analysis Failed: {str(e)}"}        
