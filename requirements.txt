@@ -9,3 +9,5 @@ textblob
 altair
 streamlit-lottie
 requests
+audio-recorder-streamlit
+
