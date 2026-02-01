@@ -1,0 +1,12 @@
+streamlit
+google-generativeai
+transformers
+torch
+plotly
+python-dotenv
+deep-translator
+textblob
+altair
+requests
+pandas
+streamlit-mic-recorder
