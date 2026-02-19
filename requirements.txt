@@ -10,3 +10,4 @@ altair
 requests
 pandas
 streamlit-mic-recorder
+streamlit-lottie
